@@ -6,3 +6,28 @@ body {
   color: #2c3e50;
   margin-top: 60px;
 }
+
+.link-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.toggle-visibility {
+  display: block;
+  width: 75px;
+  padding: 10px;
+  text-decoration: none;
+  background: #121214;
+  color: #f8f8f8;
+  border-radius: 4px;
+  transition: 0.3s;
+}
+
+.toggle-visibility:hover {
+  background: #333;
+}
+
+.app__hidden {
+  visibility: hidden;
+}
