@@ -11,9 +11,9 @@ function createDataForTable(values) {
   const tr = document.createElement("tr");
 
   values.forEach((value) => {
-    const th = document.createElement("th");
-    th.innerHTML = value;
-    tr.appendChild(th);
+    const td = document.createElement("td");
+    td.innerHTML = value;
+    tr.appendChild(td);
   });
 
   return tr;

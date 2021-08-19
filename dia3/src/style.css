@@ -58,12 +58,8 @@ table {
 
 table,
 tr,
-th {
+th,
+td {
   border: 1px solid black;
   padding: 10px;
-}
-
-tbody tr,
-tbody th {
-  font-weight: 400;
 }
