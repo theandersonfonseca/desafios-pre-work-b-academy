@@ -19,6 +19,51 @@
         data-js="input-name"
       />
     </form>
+
+    <h2>Exercício 3</h2>
+
+    <form data-js="cars-form">
+      <div>
+        <label for="url">Imagem (URL):</label>
+        <input data-js="input" type="text" id="url" />
+      </div>
+
+      <div>
+        <label for="marca">Marcar/Modelo:</label>
+        <input data-js="input" type="text" id="marca" />
+      </div>
+
+      <div>
+        <label for="ano">Ano:</label>
+        <input data-js="input" type="number" id="ano" />
+      </div>
+
+      <div>
+        <label for="placa">Placa:</label>
+        <input data-js="input" type="text" id="placa" />
+      </div>
+
+      <div>
+        <label for="cor">Cor:</label>
+        <input data-js="input" type="text" id="cor" />
+      </div>
+
+      <button type="submit">Enviar</button>
+    </form>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Imagem</th>
+          <th>Marca/Modelo</th>
+          <th>Ano</th>
+          <th>Placa</th>
+          <th>Cor</th>
+        </tr>
+      </thead>
+
+      <tbody data-js="table-body"></tbody>
+    </table>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
