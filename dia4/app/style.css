@@ -22,3 +22,9 @@ td {
   border: 1px solid black;
   padding: 10px;
 }
+
+.error-msg {
+  display: none;
+  color: red;
+  margin-top: 30px;
+}
