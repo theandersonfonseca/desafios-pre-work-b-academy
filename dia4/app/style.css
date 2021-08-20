@@ -23,8 +23,17 @@ td {
   padding: 10px;
 }
 
-.error-msg {
+.msg {
   display: none;
-  color: red;
   margin-top: 30px;
+}
+
+.msg.msg__error {
+  display: table-row;
+  color: red;
+}
+
+.msg.msg__success {
+  display: table-row;
+  color: green;
 }

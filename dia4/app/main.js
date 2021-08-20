@@ -6,7 +6,19 @@ const tableBody = document.querySelector('[data-js="table-body"]');
 const tableWarning = document.querySelector('[data-js="table-warning"]');
 const form = document.querySelector('[data-js="cars-form"]');
 const inputs = document.querySelectorAll('[data-js="input"]');
-const errorMsg = document.querySelector('[data-js="error-msg"]');
+const msg = document.querySelector('[data-js="msg"]');
+
+function createDeleteButton() {
+  const td = document.createElement("td");
+  const deleteBtn = document.createElement("button");
+
+  deleteBtn.innerHTML = "Deletar";
+  deleteBtn.setAttribute("data-js", "delete-car");
+
+  td.appendChild(deleteBtn);
+
+  return td;
+}
 
 function createDataForTable(values) {
   const tr = document.createElement("tr");
@@ -16,6 +28,8 @@ function createDataForTable(values) {
     td.innerHTML = value;
     tr.appendChild(td);
   });
+
+  tr.appendChild(createDeleteButton());
 
   return tr;
 }
@@ -27,10 +41,15 @@ function addCarsToTable(cars) {
   cars.forEach((car) => {
     tableBody.appendChild(createDataForTable(Object.values(car)));
   });
+
+  document
+    .querySelectorAll('[data-js="delete-car"]')
+    .forEach((car) => car.addEventListener("click", deleteCar));
 }
 
 async function getCars() {
-  errorMsg.style.display = "none";
+  msg.classList.remove("msg__error");
+
   tableWarning.innerHTML = "Carregando...";
 
   let data;
@@ -51,6 +70,41 @@ async function getCars() {
   }
 
   addCarsToTable(data);
+}
+
+async function deleteCar(e) {
+  const plate = e.target.parentElement.parentElement.children[3].innerHTML;
+  let response;
+
+  try {
+    response = await fetch(URL, {
+      method: "DELETE",
+      body: JSON.stringify({
+        plate,
+      }),
+      headers: { "Content-type": "application/json; charset=UTF-8" },
+    });
+  } catch (err) {
+    console.log(err);
+
+    return;
+  }
+
+  if (response.status === 400) {
+    const responseJson = await response.json();
+
+    msg.classList.add("msg__error");
+    msg.innerHTML = responseJson.message;
+
+    return;
+  }
+
+  const responseJson = await response.json();
+
+  msg.classList.add("msg__success");
+  msg.innerHTML = responseJson.message;
+
+  window.location.reload();
 }
 
 getCars();
@@ -89,11 +143,12 @@ async function postCar(values) {
 
     return;
   }
+
   if (response.status === 400) {
     const responseJson = await response.json();
 
-    errorMsg.style.display = "block";
-    errorMsg.innerHTML = responseJson.message;
+    msg.classList.add("msg__error");
+    msg.innerHTML = responseJson.message;
 
     return;
   }
